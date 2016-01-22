@@ -1,4 +1,4 @@
--- DROP DATABASE mini_bank_cc IF EXISTS;  -- can't remember correct syntax
+DROP DATABASE IF EXISTS mini_bank_cc;
 CREATE DATABASE mini_bank_cc;
 USE mini_bank_cc;
 
@@ -18,9 +18,9 @@ CREATE TABLE Accounts
     CreditLine FLOAT,
     Status VARCHAR(30) NOT NULL,
     Balance FLOAT NOT NULL,
-    CustomerID INT NOT NULL
+    CustomerID INT NOT NULL,
     
-    -- FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID) -- something is wrong
+    FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID)
 );
 
 CREATE TABLE Cards
@@ -30,9 +30,9 @@ CREATE TABLE Cards
     CashWithdrawalLimit INT,
     Type VARCHAR(30),
     Validity DATETIME,
-    AccountNumber VARCHAR(25)
+    AccountNumber VARCHAR(25),
     
-    -- FOREIGN KEY(AccountNumber) REFERENCES Accounts(AccountNumber)
+    FOREIGN KEY(AccountNumber) REFERENCES Accounts(AccountNumber)
 );
 
 CREATE TABLE Transactions
@@ -42,9 +42,9 @@ CREATE TABLE Transactions
     DateOfTransaction DATETIME,
     Value FLOAT,
     Location VARCHAR(100),
-    AccountNumber VARCHAR(25)
+    AccountNumber VARCHAR(25),
     
-    -- FOREIGN KEY(AccountNumber) REFERENCES Accounts(AccountNumber)
+    FOREIGN KEY(AccountNumber) REFERENCES Accounts(AccountNumber)
 );
 
 CREATE TABLE CardTransactions
@@ -54,5 +54,7 @@ CREATE TABLE CardTransactions
     Location VARCHAR(100),
     Type VARCHAR(30),
     DateOfTransaction DATETIME NOT NULL,
-    CardNumber VARCHAR(16) NOT NULL
+    CardNumber VARCHAR(16) NOT NULL,
+    
+    FOREIGN KEY(CardNumber) REFERENCES Cards(CardNumber)
 );
